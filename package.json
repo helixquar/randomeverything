@@ -2,7 +2,7 @@
     "name": "randomeverything",
     "displayName": "Random Everything",
     "description": "Generate random ints, floats, strings, words, etc.",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "publisher": "helixquar",
     "engines": {
         "vscode": "^1.5.0"

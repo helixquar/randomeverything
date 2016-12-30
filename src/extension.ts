@@ -196,7 +196,7 @@ function randomWord(): string{
     var strings = fs.readFileSync(extensionPath + "/assets/words.short.txt")
                     .toString()
                     .split("\r\n");
-    var randomVar:string = chance.pickone(strings, 24);
+    var randomVar:string = chance.pickone(strings);
 
     return randomVar;
 }
@@ -207,9 +207,9 @@ function randomText(): string{
     var strings = fs.readFileSync(extensionPath + "/assets/words.short.txt")
                     .toString()
                     .split("\r\n");
-    var randomVar:string = chance.pickset(strings);
+    var randomVar: string[] = chance.pickset(strings, 24);
 
-    return randomVar;
+    return randomVar.join(' ');
 }
 
 function randomDate(): string{
