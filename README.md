@@ -45,7 +45,7 @@ Type "random":
 
 See [changelog](CHANGELOG.md).
 
-## @TODO`
+## @TODO
 - [ ] Overridable settings
 
 ## References
