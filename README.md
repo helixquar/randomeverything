@@ -1,6 +1,6 @@
 # Random Everything
 
-A VS Code extension that generate random ints, floats, strings, words, etc.
+A VS Code extension that generates random ints, floats, strings, words, etc.
 
 This is intended to be a feature to feature VS Code port of [Random Everything for Sublime Text.](https://github.com/kimpettersen/random-sublime-text-plugin)
 

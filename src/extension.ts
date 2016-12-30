@@ -26,7 +26,7 @@ export function activate(context: vscode.ExtensionContext) {
 
     context.subscriptions.push(vscode.commands.registerCommand('randomeverything.int', insertRandomInt));
     context.subscriptions.push(vscode.commands.registerCommand('randomeverything.float', insertRandomFloat));
-    context.subscriptions.push(vscode.commands.registerCommand('randomeverything.randomVar', insertRandomLetters));
+    context.subscriptions.push(vscode.commands.registerCommand('randomeverything.letters', insertRandomLetters));
     context.subscriptions.push(vscode.commands.registerCommand('randomeverything.lettersAndNumbers', insertRandomLettersAndNumbers));
     context.subscriptions.push(vscode.commands.registerCommand('randomeverything.country', insertRandomCountry));
     context.subscriptions.push(vscode.commands.registerCommand('randomeverything.word', insertRandomWord));
