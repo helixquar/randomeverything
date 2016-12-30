@@ -1,0 +1,168 @@
+{
+    "name": "randomeverything",
+    "displayName": "randomeverything",
+    "description": "Generate random ints, floats, strings, words, etc.",
+    "version": "0.0.1",
+    "publisher": "helixquar",
+    "engines": {
+        "vscode": "^1.5.0"
+    },
+    "icon": "images/icon.svg",
+    "bugs": {
+        "url": "https://github.com/helixquar/randomeverything/issues"
+    },
+    "homepage": "https://github.com/helixquar/randomeverything/blob/master/README.md",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/helixquar/randomeverything.git"
+    },
+    "galleryBanner" : {
+        "color": "#5c2d91",
+        "theme" : "dark"
+    },
+    "categories": [
+        "Other"
+    ],
+    "keywords": [
+        "random",
+        "random number",
+        "random names",
+        "random email"
+    ],
+    "activationEvents": [
+        "onCommand:randomeverything.int",
+        "onCommand:randomeverything.float",
+        "onCommand:randomeverything.letters",
+        "onCommand:randomeverything.lettersAndNumbers",
+        "onCommand:randomeverything.country",
+        "onCommand:randomeverything.word",
+        "onCommand:randomeverything.text",
+        "onCommand:randomeverything.date",
+        "onCommand:randomeverything.firstName",
+        "onCommand:randomeverything.lastName",
+        "onCommand:randomeverything.fullName",
+        "onCommand:randomeverything.email",
+        "onCommand:randomeverything.url",
+        "onCommand:randomeverything.hexColor",
+        "onCommand:randomeverything.iPv4Address",
+        "onCommand:randomeverything.iPV6Address",
+        "onCommand:randomeverything.guid"
+    ],
+    "main": "./out/src/extension",
+    "contributes": {
+        "configuration": {
+            "type": "object",
+            "title": "Random Everything Configuration",
+            "properties": {
+                "randomeverything.enable": {
+                    "type": "boolean",
+                    "default": "true",
+                    "description": "Enable/disable this extension."
+                }
+            }
+        },
+        "commands": [
+            {
+                "command": "randomeverything.int",
+                "title": "Random: Int",
+                "description": "Requires a range from a-b separated with a: *-*. Default: 1-100"
+            },
+            {
+                "command": "randomeverything.float",
+                "title": "Random: Float",
+                "description": "Requires a range from a-b separated with a: *-*. Default: 1-100"
+            },
+            {
+                "command": "randomeverything.letters",
+                "title": "Random: Letters",
+                "description": "Generatates a random string of lower and uppercase letters with a length between 5 and 20"
+            },
+            {
+                "command": "randomeverything.lettersAndNumbers",
+                "title": "Random: Letters and numbers",
+                "description": "Generatates a random string of lower and uppercase letters and numbers with a length between 5 and 20"
+            },
+            {
+                "command": "randomeverything.country",
+                "title": "Random: Country",
+                "description": "Picks a random country"
+            },
+            {
+                "command": "randomeverything.word",
+                "title": "Random: Word",
+                "description": "Picks a random word"
+            },
+            {
+                "command": "randomeverything.text",
+                "title": "Random: Text",
+                "description": "Picks 24 random words"
+            },
+            {
+                "command": "randomeverything.date",
+                "title": "Random: Date",
+                "description": "Picks a random ISO-8601 Date"
+            },
+            {
+                "command": "randomeverything.firstName",
+                "title": "Random: First name",
+                "description": "Picks a random first name"
+            },
+            {
+                "command": "randomeverything.lastName",
+                "title": "Random: Last name",
+                "description": "Picks a random last name"
+            },
+            {
+                "command": "randomeverything.fullName",
+                "title": "Random: Full name",
+                "description": "Picks a random full names"
+            },
+            {
+                "command": "randomeverything.email",
+                "title": "Random: E-mail",
+                "description": "Picks a random E-mail address"
+            },
+            {
+                "command": "randomeverything.url",
+                "title": "Random: Url",
+                "description": "Generates a URL using random words"
+            },
+            {
+                "command": "randomeverything.hexColor",
+                "title": "Random: Hex Color",
+                "description": "Generates a random hex color formatted \"#abc123\""
+            },
+            {
+                "command": "randomeverything.iPv4Address",
+                "title": "Random: IPv4 Address",
+                "description": "Generates a random ipv4 ip address"
+            },
+            {
+                "command": "randomeverything.iPV6Address",
+                "title": "Random: IPV6 Address",
+                "description": "Generates a random ivp6 ip address"
+            },
+            {
+                "command": "randomeverything.guid",
+                "title": "Random: GUID",
+                "description": "Generates a random GUID"
+            }
+        ]
+    },
+    "scripts": {
+        "vscode:prepublish": "tsc -p ./",
+        "compile": "tsc -watch -p ./",
+        "postinstall": "node ./node_modules/vscode/bin/install",
+        "test": "node ./node_modules/vscode/bin/test"
+    },
+    "dependencies": {
+        "chance": "^1.0.4"
+    },
+    "devDependencies": {
+        "typescript": "^2.0.3",
+        "vscode": "^1.0.0",
+        "mocha": "^2.3.3",
+        "@types/node": "^6.0.40",
+        "@types/mocha": "^2.2.32"
+    }
+}
