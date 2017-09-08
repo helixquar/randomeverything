@@ -280,7 +280,7 @@ function randomIP(option?:string): string{
 
 function randomGUID(): string{
     var chance = require('chance').Chance();
-    var randomVar:string = chance.guid();
+    var randomVar:string = chance.guid({ version: 4 });
 
     return randomVar;
 }
