@@ -51,6 +51,9 @@ function insertRandomInt(): void {
 
     Window.showInputBox({prompt: "Please enter [MIN-MAX]", value:"1-100"}).then(
         function(txt){
+            if( !txt.match(/-/) ){
+                txt = `0-${txt}`;
+            }
             if(txt){
                 var args = txt.split("-");
 
@@ -75,6 +78,9 @@ function insertRandomFloat(): void {
 
     Window.showInputBox({prompt: "Please enter [MIN-MAX]", value:"1-100"}).then(
         function(txt){
+            if( !txt.match(/-/) ){
+                txt = `0-${txt}`;
+            }
             if(txt){
                 var args = txt.split("-");
 
