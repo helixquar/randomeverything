@@ -287,14 +287,8 @@ function randomGUID(): string {
 }
 
 function randomNif(): string {
-    let numbers = [0, 0, 0, 0, 0, 0, 0, 0];
-
-    let dni:string = numbers.map(() => {
-        return Math.floor(Math.random() * 9)
-    }).join("")
-
+    let dni:string = (Math.floor(Math.random() * ( 99999999 - 10000000)) + 10000000).toString();
     let letter:string = "T,R,W,A,G,M,Y,F,P,D,X,B,N,J,Z,S,Q,V,H,L,C,K,E".split(",")[parseInt(dni) % 23]
-
     return  dni + letter;
 }
 
