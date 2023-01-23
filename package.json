@@ -46,7 +46,8 @@
         "onCommand:randomeverything.hexColor",
         "onCommand:randomeverything.iPv4Address",
         "onCommand:randomeverything.iPV6Address",
-        "onCommand:randomeverything.guid"
+        "onCommand:randomeverything.guid",
+        "onCommand:randomeverything.nif"
     ],
     "main": "./out/src/extension",
     "contributes": {
@@ -146,6 +147,11 @@
                 "command": "randomeverything.guid",
                 "title": "Random: GUID",
                 "description": "Generates a random GUID"
+            },
+            {
+                "command": "randomeverything.nif",
+                "title": "Random: Spanish Nif",
+                "description": "Generates a random Spanish Identification Number"
             }
         ]
     },
