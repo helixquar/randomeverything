@@ -18,8 +18,7 @@ export function activate(context: vscode.ExtensionContext) {
 
     var settings = new Settings();
 
-    if(!settings.Enabled)
-    {
+    if (!settings.Enabled) {
         console.log("The extension \"randomeverything\" is disabled.");
         return;
     }
@@ -41,55 +40,54 @@ export function activate(context: vscode.ExtensionContext) {
     context.subscriptions.push(vscode.commands.registerCommand('randomeverything.iPv4Address', insertRandomIPv4Address));
     context.subscriptions.push(vscode.commands.registerCommand('randomeverything.iPV6Address', insertRandomIPV6Address));
     context.subscriptions.push(vscode.commands.registerCommand('randomeverything.guid', insertRandomGUID));
+    context.subscriptions.push(vscode.commands.registerCommand('randomeverything.nif', insertRandomNif));
 
 }
 
 function insertRandomInt(): void {
 
-    var max:number;
-    var min:number;
+    var max: number;
+    var min: number;
 
-    Window.showInputBox({prompt: "Please enter [MIN-MAX]", value:"1-100"}).then(
-        function(txt){
-            if(txt){
+    Window.showInputBox({ prompt: "Please enter [MIN-MAX]", value: "1-100" }).then(
+        function (txt) {
+            if (txt) {
                 var args = txt.split("-");
 
                 min = Number.parseInt(args[0]);
                 max = Number.parseInt(args[1]);
 
-                if(args.length != 2 || isNaN(min) || isNaN(max))
-                {
+                if (args.length != 2 || isNaN(min) || isNaN(max)) {
                     //@TODO: Error handling practices for vscode extensions
                     Window.showErrorMessage("Invalid format.");
                     return;
                 }
                 processSelection(randomIntString, [min, max]);
             }
-    });
+        });
 }
 
 function insertRandomFloat(): void {
 
-    var max:number;
-    var min:number;
+    var max: number;
+    var min: number;
 
-    Window.showInputBox({prompt: "Please enter [MIN-MAX]", value:"1-100"}).then(
-        function(txt){
-            if(txt){
+    Window.showInputBox({ prompt: "Please enter [MIN-MAX]", value: "1-100" }).then(
+        function (txt) {
+            if (txt) {
                 var args = txt.split("-");
 
                 min = Number.parseInt(args[0]);
                 max = Number.parseInt(args[1]);
 
-                if(args.length != 2 || isNaN(min) || isNaN(max))
-                {
+                if (args.length != 2 || isNaN(min) || isNaN(max)) {
                     //@TODO: Error handling practices for vscode extensions
                     Window.showErrorMessage("Invalid format.");
                     return;
                 }
                 processSelection(randomFloatString, [min, max]);
             }
-    });
+        });
 }
 
 function insertRandomLetters(): void {
@@ -152,79 +150,82 @@ function insertRandomGUID(): void {
     processSelection(randomGUID, []);
 }
 
+function insertRandomNif(): void {
+    processSelection(randomNif, []);
+}
+
 /**
  * Chance.js Wrappers
  */
-function randomIntString(min, max): string{
+function randomIntString(min, max): string {
     var chance = require('chance').Chance();
-    var randomVar:Number = chance.integer({min: min, max: max});
+    var randomVar: Number = chance.integer({ min: min, max: max });
 
     return randomVar.toString();
 }
 
-function randomFloatString(min, max): string{
+function randomFloatString(min, max): string {
     var chance = require('chance').Chance();
-    var randomVar:Number = chance.floating({min: min, max: max});
+    var randomVar: Number = chance.floating({ min: min, max: max });
 
     return randomVar.toString();
 }
 
-function randomLetters(min, max): string{
+function randomLetters(min, max): string {
     var chance = require('chance').Chance();
-    var randomVar:string = chance.string({pool: "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"});
+    var randomVar: string = chance.string({ pool: "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz" });
 
     return randomVar;
 }
 
-function randomLettersAndNumbers(min, max): string{
+function randomLettersAndNumbers(min, max): string {
     var chance = require('chance').Chance();
-    var randomVar:string = chance.string({pool: "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"});
+    var randomVar: string = chance.string({ pool: "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz" });
 
     return randomVar;
 }
 
-function randomCountry(isFull:boolean): string{
+function randomCountry(isFull: boolean): string {
     var chance = require('chance').Chance();
-    var randomVar:string = chance.country({ full: isFull });
+    var randomVar: string = chance.country({ full: isFull });
 
     return randomVar;
 }
 
-function randomWord(): string{
+function randomWord(): string {
     var chance = require('chance').Chance();
     let extensionPath = vscode.extensions.getExtension("helixquar.randomeverything").extensionPath;
     var strings = fs.readFileSync(extensionPath + "/assets/words.short.txt")
-                    .toString()
-                    .split("\r\n");
-    var randomVar:string = chance.pickone(strings);
+        .toString()
+        .split("\r\n");
+    var randomVar: string = chance.pickone(strings);
 
     return randomVar;
 }
 
-function randomText(): string{
+function randomText(): string {
     var chance = require('chance').Chance();
     let extensionPath = vscode.extensions.getExtension("helixquar.randomeverything").extensionPath;
     var strings = fs.readFileSync(extensionPath + "/assets/words.short.txt")
-                    .toString()
-                    .split("\r\n");
+        .toString()
+        .split("\r\n");
     var randomVar: string[] = chance.pickset(strings, 24);
 
     return randomVar.join(' ');
 }
 
-function randomDate(): string{
+function randomDate(): string {
     var chance = require('chance').Chance();
-    var randomVar:string = chance.date({string: true});
+    var randomVar: string = chance.date({ string: true });
 
     return randomVar;
 }
 
-function randomName(format?:any): string{
+function randomName(format?: any): string {
     var chance = require('chance').Chance();
-    var randomVar:string;
+    var randomVar: string;
 
-    switch(format)
-    {
+    switch (format) {
         case 'first':
             randomVar = chance.first();
             break;
@@ -240,30 +241,30 @@ function randomName(format?:any): string{
     return randomVar;
 }
 
-function randomEmail(): string{
+function randomEmail(): string {
     var chance = require('chance').Chance();
-    var randomVar:string = chance.email();
+    var randomVar: string = chance.email();
 
     return randomVar;
 }
 
-function randomUrl(): string{
+function randomUrl(): string {
     var chance = require('chance').Chance();
-    var randomVar:string = chance.url();
+    var randomVar: string = chance.url();
 
     return randomVar;
 }
 
-function randomColor(): string{
+function randomColor(): string {
     var chance = require('chance').Chance();
-    var randomVar:string = chance.color({format: 'hex'});
+    var randomVar: string = chance.color({ format: 'hex' });
 
     return randomVar;
 }
 
-function randomIP(option?:string): string{
+function randomIP(option?: string): string {
     var chance = require('chance').Chance();
-    var randomVar:string;
+    var randomVar: string;
 
     switch (option) {
         default:
@@ -278,11 +279,23 @@ function randomIP(option?:string): string{
     return randomVar;
 }
 
-function randomGUID(): string{
+function randomGUID(): string {
     var chance = require('chance').Chance();
-    var randomVar:string = chance.guid();
+    var randomVar: string = chance.guid();
 
     return randomVar;
+}
+
+function randomNif(): string {
+    let numbers = [0, 0, 0, 0, 0, 0, 0, 0];
+
+    let dni:string = numbers.map(() => {
+        return Math.floor(Math.random() * 9)
+    }).join("")
+
+    let letter:string = "T,R,W,A,G,M,Y,F,P,D,X,B,N,J,Z,S,Q,V,H,L,C,K,E".split(",")[parseInt(dni) % 23]
+
+    return  dni + letter;
 }
 
 // this method is called when your extension is deactivated
