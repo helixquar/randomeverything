@@ -52,41 +52,72 @@ function insertRandomInt(): void {
     Window.showInputBox({prompt: "Please enter [MIN-MAX]", value:"1-100"}).then(
         function(txt){
             if(txt){
-                var args = txt.split("-");
+                const regex = /^(-?\d+)-(-?\d+)$/
+                const match = regex.exec(txt)
 
-                min = Number.parseInt(args[0]);
-                max = Number.parseInt(args[1]);
-
-                if(args.length != 2 || isNaN(min) || isNaN(max))
+                if(!match)
                 {
-                    //@TODO: Error handling practices for vscode extensions
                     Window.showErrorMessage("Invalid format.");
                     return;
                 }
+
+
+                min = Number.parseInt(match[1]);
+                max = Number.parseInt(match[2]);
+
+                if(isNaN(min) || isNaN(max))
+                {
+                    //@TODO: Error handling practices for vscode extensions
+                    Window.showErrorMessage("Invalid numbers.");
+                    return;
+                }
+                
+                if(min > max)
+                {
+                    Window.showErrorMessage("Invalid Input: The maximum value cannot be less than the minimum value");
+                    return;
+                }
+
                 processSelection(randomIntString, [min, max]);
             }
     });
 }
 
 function insertRandomFloat(): void {
-
+    
     var max:number;
     var min:number;
 
     Window.showInputBox({prompt: "Please enter [MIN-MAX]", value:"1-100"}).then(
         function(txt){
             if(txt){
-                var args = txt.split("-");
+                
+                const regex = /^(-?\d+(?:\.\d+)?)\s*-\s*(-?\d+(?:\.\d+)?)$/
+                const match = regex.exec(txt)
 
-                min = Number.parseInt(args[0]);
-                max = Number.parseInt(args[1]);
-
-                if(args.length != 2 || isNaN(min) || isNaN(max))
+                if(!match)
                 {
-                    //@TODO: Error handling practices for vscode extensions
                     Window.showErrorMessage("Invalid format.");
                     return;
                 }
+
+
+                min = Number.parseFloat(match[1]);
+                max = Number.parseFloat(match[2]);
+
+                if(isNaN(min) || isNaN(max))
+                {
+                    //@TODO: Error handling practices for vscode extensions
+                    Window.showErrorMessage("Invalid numbers.");
+                    return;
+                }
+                
+                if(min > max)
+                {
+                    Window.showErrorMessage("Invalid Input: The maximum value cannot be less than the minimum value");
+                    return;
+                }
+
                 processSelection(randomFloatString, [min, max]);
             }
     });
