@@ -50,16 +50,15 @@ function insertRandomCustom(): void {
     var settings = new Settings();
 
     // create a quickpick of all custom random strings/items
-    const prev = previous ? [`${previous} (prev)`] : [];
-    const keys = prev.concat(Object.keys(settings.Custom));
+    const prevString = `${previous} (prev)`
+    const keys = Object.keys(settings.Custom);
+    const items = previous ? [prevString].concat(keys) : keys
 
-    var count = 0;
-    vscode.window.showQuickPick(keys, { placeHolder: previous }).then((key) => {
+    vscode.window.showQuickPick(items, { placeHolder: previous }).then((key) => {
         if (key == null) return;
 
-        if (count == 0 && previous) key = previous;
-
-        count++
+        if (key === prevString) key = previous;
+        
         previous = key;
         processSelection(randomCustom, [settings.Custom[key]]);
     });
