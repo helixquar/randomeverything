@@ -46,7 +46,8 @@
         "onCommand:randomeverything.hexColor",
         "onCommand:randomeverything.iPv4Address",
         "onCommand:randomeverything.iPV6Address",
-        "onCommand:randomeverything.guid"
+        "onCommand:randomeverything.guid",
+        "onCommand:randomeverything.custom"
     ],
     "main": "./out/src/extension",
     "contributes": {
@@ -58,6 +59,11 @@
                     "type": "boolean",
                     "default": "true",
                     "description": "Enable/disable this extension."
+                },
+                "randomeverything.custom": {
+                    "type": "object",
+                    "default": {},
+                    "description": "Define custom strings or lists to generate random values from."
                 }
             }
         },
@@ -146,6 +152,11 @@
                 "command": "randomeverything.guid",
                 "title": "Random: GUID",
                 "description": "Generates a random GUID"
+            },
+            {
+                "command": "randomeverything.custom",
+                "title": "Random: Custom",
+                "description": "Generates random strings from items or characters specified in settings"
             }
         ]
     },

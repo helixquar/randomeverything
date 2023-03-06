@@ -16,13 +16,13 @@ import Workspace = vscode.workspace;
 
 export function activate(context: vscode.ExtensionContext) {
 
-    var settings = new Settings();
+  var settings = new Settings();
 
     if(!settings.Enabled)
     {
         console.log("The extension \"randomeverything\" is disabled.");
-        return;
-    }
+    return;
+  }
 
     context.subscriptions.push(vscode.commands.registerCommand('randomeverything.int', insertRandomInt));
     context.subscriptions.push(vscode.commands.registerCommand('randomeverything.float', insertRandomFloat));
@@ -41,11 +41,47 @@ export function activate(context: vscode.ExtensionContext) {
     context.subscriptions.push(vscode.commands.registerCommand('randomeverything.iPv4Address', insertRandomIPv4Address));
     context.subscriptions.push(vscode.commands.registerCommand('randomeverything.iPV6Address', insertRandomIPV6Address));
     context.subscriptions.push(vscode.commands.registerCommand('randomeverything.guid', insertRandomGUID));
+    context.subscriptions.push(vscode.commands.registerCommand("randomeverything.custom", insertRandomCustom));
+}
 
+// tracks the previously selected custom input
+var previous: string = "";
+function insertRandomCustom(): void {
+    var settings = new Settings();
+
+    // create a quickpick of all custom random strings/items
+    const prev = previous ? [`${previous} (prev)`] : [];
+    const keys = prev.concat(Object.keys(settings.Custom));
+
+    var count = 0;
+    vscode.window.showQuickPick(keys, { placeHolder: previous }).then((key) => {
+        if (key == null) return;
+
+        if (count == 0 && previous) key = previous;
+
+        count++
+        previous = key;
+        processSelection(randomCustom, [settings.Custom[key]]);
+    });
+}
+
+// generates a string from a string of provided chars
+// or generates a string from an array of strings
+function randomCustom(items: string | string[]) {
+    var chance = require("chance").Chance();
+    if (typeof(items) === "string") {
+        return chance.string({ pool: items });
+    }
+
+    if (items instanceof Array) {
+        return chance.pickone(items);
+    }
+
+    return "";
 }
 
 function insertRandomInt(): void {
-
+    
     var max:number;
     var min:number;
 
@@ -194,8 +230,8 @@ function randomWord(): string{
     var chance = require('chance').Chance();
     let extensionPath = vscode.extensions.getExtension("helixquar.randomeverything").extensionPath;
     var strings = fs.readFileSync(extensionPath + "/assets/words.short.txt")
-                    .toString()
-                    .split("\r\n");
+    .toString()
+    .split("\r\n");
     var randomVar:string = chance.pickone(strings);
 
     return randomVar;
@@ -205,8 +241,8 @@ function randomText(): string{
     var chance = require('chance').Chance();
     let extensionPath = vscode.extensions.getExtension("helixquar.randomeverything").extensionPath;
     var strings = fs.readFileSync(extensionPath + "/assets/words.short.txt")
-                    .toString()
-                    .split("\r\n");
+    .toString()
+    .split("\r\n");
     var randomVar: string[] = chance.pickset(strings, 24);
 
     return randomVar.join(' ');
@@ -275,7 +311,7 @@ function randomIP(option?:string): string{
             break;
     }
 
-    return randomVar;
+  return randomVar;
 }
 
 function randomGUID(): string{
